@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "Registration";
+}
+
+<h2>Registration</h2>
+<div>
+    <table>
+        <tr>
+            <td>Username :</td>
+            <td><input type="text" id="txtusername" /> </td>
+        </tr>
+        <tr>
+            <td>Password :</td>
+            <td><input type="password" id="txtPassword" /> </td>
+        </tr>
+        <tr>
+            <td>ConfirmPassword :</td>
+            <td><input type="text" id="txtconfirm" /> </td>
+        </tr>
+        <tr>
+            <td>Email :</td>
+            <td><input type="text" id="txtEmail" /> </td>
+        </tr>
+
+        <tr>
+            <td>PhoneNumber :</td>
+            <td><input type="text" id="txtphone" /> </td>
+        </tr>
+    </table>
+    <input type="submit" id="btnsubmit" value="Register" onclick="SaveEmployee()" />
+</div>
+<div id="GetPartial">
+
+</div>
+<script>
+
+
+    function SaveEmployee() {
+        debugger;
+        var model = {
+            Username: $('#txtusername').val(),
+            Password: $('#txtPassword').val(),
+            ConfrimPassword: $('#txtconfirm').val(),
+            Email: $('#txtEmail').val(),
+            PhoneNumber: $('#txtphone').val(),
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "/Employee/Registration",
+            data: JSON.stringify({
+                data: model
+            }),
+            cache: false,
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                debugger;
+                //getAll();
+                window.location.href = "http://localhost:51410/Employee/LoginPage";
+                //alert("Successfully Registered");
+            }
+
+        });
+    }
+
+    //function getAll() {
+    //    $.ajax({
+    //        type: "Get",
+    //        url: "/Employs/GetAllEmpPartial",
+
+    //        cache: false,
+    //        dataType: "Html",
+    //        contentType: "application/html; charset=utf-8",
+    //        success: function (data) {
+    //            debugger;
+    //            var da = data;
+    //            $('#GetPartial').html(da);
+    //        }
+
+    //    });
+    //}
+
+</script>
